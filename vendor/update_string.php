@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!$_SESSION['user']){
+    header('Location: index.php');
+}
 $column = $_POST['id'];
 $column = explode( '_!_', $column);
 $link = mysqli_connect('localhost', 'root', '', 'api_db');

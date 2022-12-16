@@ -1,25 +1,44 @@
 <?php
 session_start();
-require_once 'config/connect.php';
 if($_SESSION['user']){
     header('Location: profile.php');
 }
 ?>
+<html>
 <head>
-    <title>Вход</title>
+    <title>Регистрация</title>
     <meta charset="UTF-8">
 </head>
-<form method="post" action="vendor/signin.php" name="signup-form">
-    <div class="form-element">
-        <label>Логин</label>
-        <input type="text" name="login_auth" pattern="[a-zA-Z0-9]+" required placeholder="Введите логин"/>
-    </div>
-    <div class="form-element">
+<body>
+    <form method="post" action="vendor/signup.php" name="reg-form" enctype="multipart/form-data">
+        <div class="form-element">
+            <label>Логин</label>
+            <input type="text" name="login" pattern="[a-zA-Z0-9]+" required placeholder="Введите логин"/>
+        </div>
+        <div class="form-element">
+            <label>Как вас зовут?</label>
+            <input type="text" name="name" required placeholder="Введите ваше имя"/>
+        </div>
+        <div class="form-element">
+            <label>Кто ты, воин?</label>
+            <input type="text" name="profession" required placeholder="Введите вашу профессию"/>
+        </div>
+        <div class="form-element">
+            <label>Ваша почта?</label>
+            <input type="text" name="email" required placeholder="Введите вашу почту"/>
+        </div>
+        <div class="form-element">
         <label>Пароль</label>
-        <input type="password" name="password_auth" required placeholder="Введите пароль"/>
-    </div>
+        <input type="password" name="password" required placeholder="Введите пароль"/>
+        </div>
+        <div class="form-element">
+            <label>Подвердите пароль</label>
+            <input type="password" name="password_confirm" required placeholder="Подтвердите пароль"/>
+        </div>
+        <label>Ваше фото</label>
+        <input type="file" name="photo">
         <p>
-            У вас нет аккаунта? <a href="reg.php">зарегистрироваться</a>
+            У вас есть аккаунт? <a href="index.php">авторизоваться</a>
         </p>
             <?php
             if($_SESSION['message']){
@@ -27,14 +46,16 @@ if($_SESSION['user']){
             }
             unset($_SESSION['message']);
             ?>
-    <button type="submit" name="login_but" value="login_but">войти</button>
-</form>
+        <button type="submit" name="reg" value="reg">Зарегистрироваться</button>
+    </form>
+</body>
+</html>
 <style>
     .msg {
         border: none;
         padding: 10px;
         text-align: center;
-        color: #2dbb08;
+        color: #f50b0b;
         font-weight: bold;
     }
     * {

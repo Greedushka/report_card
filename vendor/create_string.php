@@ -1,19 +1,22 @@
 <?php
+session_start();
+if(!$_SESSION['user']){
+    header('Location: index.php');
+}
 require_once 'config/connect.php';
-var_dump('123');
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $price = 0;
     $date = date('Y-m-d');
     if(isset($_POST['work_time'])) {
         if ($_POST['stan_count'] == '1') {
-            if ($_POST['shift_time'] == 'D') {
+            if ($_POST['shift_time'] == 'День') {
                 $price = 270;
             } else {
                 $price = 315;
             }
         } else {
-            if ($_POST['shift_time'] == 'D') {
+            if ($_POST['shift_time'] == 'День') {
                 $price = 270 * 2;
             } else {
                 $price = 315 * 2;
@@ -26,6 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             echo "Error: " . $sql . "<br>" . mysqli_error($link);
         }
         mysqli_close($link);
+        header('Location: report_card.php');
     }
 }
 ?>
